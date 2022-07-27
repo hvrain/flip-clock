@@ -1,0 +1,168 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#container {
+}
+
+#flipclock {
+  margin: 200px auto; padding: 5px 5px;
+  width:fit-content; height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 90px;
+  color: white;
+  text-align: center;
+  background-color: #888;
+  border-radius: 5px;
+}
+
+article:not(.active) * {
+  display: none;
+}
+
+article.active .front-plate {
+  display: block;
+  animation: rofront-plate 1s linear 0s 1;
+  animation-fill-mode: forwards;
+}
+
+article.active .back-plate {
+  display: block;
+  animation: roback-plate 1s linear 0s 1;
+  animation-fill-mode: forwards;
+}
+
+#hour1, #hour2, #minute1, #minute2, #second1, #second2 {
+  width: 80px; height: 100px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#hour2, #minute2 {
+  padding-right: 20px;
+}
+
+#hour2::after, #minute2::after {
+  content: ":";
+  position: absolute;
+  top: -20px; right: 0;
+  text-align: center;
+  color: #222;
+}
+
+#hour1 > * {
+  perspective-origin: 100% 0;
+}
+#hour2 > *{
+  perspective-origin: 60% 0;
+}
+#minute1 > *{
+  perspective-origin: 20% 0;
+}
+#minute2 > *{
+  perspective-origin: -20% 0;
+}
+#second1 > *{
+  perspective-origin: -60% 0;
+}
+#second2 > *{
+  perspective-origin: -100% 0;
+}
+
+/* #zero .front-plate, #one .front-plate {
+  animation: rofront-plate 0.5s linear 0.5s infinite;
+}
+#zero .back-plate, #one .back-plate {
+  animation: roback-plate 0.5s linear 0.5s infinite;
+} */
+
+.top {
+  width: 80px; height: 100px;
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+  position: absolute;
+  line-height: 90px;
+  background-color: #222;
+  border-radius: 5px 5px 0px 0px;
+  box-sizing: border-box;
+}
+
+.front-plate {
+  width: 80px; height: 100px;
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+  position: absolute;
+  line-height: 90px;
+  background-color: #222;
+  backface-visibility: hidden;
+  border-radius: 5px 5px 0px 0px;
+  box-sizing: border-box;
+  perspective-origin: 500%;
+}
+
+.back-plate {
+  width: 80px; height: 100px;
+  clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0% 100%);
+  overflow: hidden;
+  position: absolute;
+  line-height: 90px;
+  background-color: #363636;
+  backface-visibility: hidden;
+  border-radius: 0px 0px 5px 5px;
+  box-sizing: border-box;
+  transform: rotateX(180deg);
+}
+
+.bottom {
+  width: 80px; height: 100px;
+  clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0% 100%);
+  position: absolute;
+  line-height: 90px;
+  background-color: #363636;
+  border-radius: 0px 0px 5px 5px;
+  box-sizing: border-box;
+  /* opacity: 1; */
+  z-index: -1;
+}
+
+.line {
+  position: absolute;
+  left: 0.5px;
+  width: 80px; height: 3px;
+  background-color: #000;
+}
+
+.zero, .one, .two, .three, .four, .five, .six, .seven, .eight, .nine {
+  width: 80px; height: 100px; 
+  position: absolute;
+  /* right: 0px; */
+  display: flex;
+  align-items: center;
+  perspective: 1000px;
+}
+
+@keyframes rofront-plate {
+  0% {
+    transform: rotateX(0deg);
+  }
+  20% {
+    transform: rotateX(-180deg);
+  }
+  100% {
+    transform: rotateX(-180deg);
+  }
+}
+@keyframes roback-plate {
+  0% {
+    transform: rotateX(180deg);
+  }
+  20% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
